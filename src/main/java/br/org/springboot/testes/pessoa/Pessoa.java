@@ -1,19 +1,16 @@
 package br.org.springboot.testes.pessoa;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@AllArgsConstructor 
+@ToString
 public class Pessoa {
 
-	private String nome;
+	@Getter @Setter private String nome;
 
-	public Pessoa(String nome) {
-		this.nome = nome;
-	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 }

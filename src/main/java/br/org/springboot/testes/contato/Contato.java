@@ -1,33 +1,35 @@
 package br.org.springboot.testes.contato;
 
-import br.org.springboot.testes.endereco.Endereco;
-import br.org.springboot.testes.pessoa.Pessoa;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@NoArgsConstructor @AllArgsConstructor
+@Data
+@Builder
 public class Contato {
 
-	private Pessoa pessoa;
-	
-	private Endereco endereco;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Getter private Long id;
 
-	public Contato(Pessoa pessoa, Endereco endereco) {
-		this.pessoa = pessoa;
-		this.endereco = endereco;
-	}
+	@NotEmpty(message="O DDD deve ser preenchido")
+	@Getter @Setter private String ddd;
 
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
+	@NotEmpty(message="O Telefone deve ser preenchido")
+	@Getter @Setter private String telefone;
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
+	@NotEmpty(message="O Nome deve ser preenchido")
+	@Getter @Setter private String nome;
 
 }

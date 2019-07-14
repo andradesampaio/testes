@@ -21,12 +21,14 @@ import br.org.springboot.testes.contato.ContatoRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+//Configurar banco de dados em memória para fins de teste 
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.HSQL)
 public class ContatosRepositoryIntegrationTest {
 
 	@Autowired
 	private ContatoRepository contatoRepository;
 
+	//A ExpectedException permite que você verifique se seu código lança uma exceção específica
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
@@ -34,16 +36,16 @@ public class ContatosRepositoryIntegrationTest {
 
 	@Before
 	public void start() {
-		//contato = new Contato("Chefe", "0y", "9xxxxxxx9");
 		contato = Contato.builder()
 				  .nome("Chefe")
-				  .ddd("11")
+				  .ddd("12")
 				  .telefone("9xxxxxxx9")
 				  .build();				  
 	}
 
 	@Test
 	public void saveComDddNuloDeveLancarException() throws Exception {
+		
 		expectedException.expect(ConstraintViolationException.class);
 		expectedException.expectMessage("O DDD deve ser preenchido");
 

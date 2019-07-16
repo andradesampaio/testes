@@ -8,7 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface ContatoRepository extends JpaRepository<Contato, Long> {
-	Contato findFirstByNome(String nome);
+	
+	
+	Contato findFirstByNome(String nome);	
 	List<Contato> findAllByNomeIgnoreCaseContaining(String nome);
 	
 	@Query(value = "SELECT c FROM Contato c")

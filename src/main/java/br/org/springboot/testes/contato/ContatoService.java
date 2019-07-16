@@ -1,17 +1,43 @@
 package br.org.springboot.testes.contato;
 
-import br.org.springboot.testes.endereco.EnderecoService;
-import br.org.springboot.testes.pessoa.PessoaService;
+import java.util.Optional;
+import java.util.stream.Stream;
 
+import javax.validation.ConstraintViolationException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class ContatoService {
+	
+	ContatoRepository contatoRepository;
+	
+	@Autowired
+	public void ContatoRepository (ContatoRepository contatoRepository) {
+		this.contatoRepository = contatoRepository;
+	}
 
-	private PessoaService pessoaService = new PessoaService();
-	private EnderecoService enderecoService = new EnderecoService();
-
-//	public Contato criaContato(String nome, String rua) {
-//		Pessoa pessoa = pessoaService.getPessoa(nome);
-//		Endereco endereco = enderecoService.getEndereco(rua);
-//		return new Contato(1l, pessoa, endereco);
-//	}
+	public void inserir(Contato contato) throws ContatoException {
+		try {
+			contatoRepository.save(contato);
+		} catch (ConstraintViolationException e) {
+			throw new ContatoException(e);
+		}
+		
+	}
+	
+	public void remover(Long id) {
+		contatoRepository.deleteById(id);		
+	};
+	
+	public Stream<Contato> buscarContatos(){
+		return contatoRepository.buscaTodosContatos();
+	}
+	
+	public Optional<Contato> buscarContato(Long id) {
+		return contatoRepository.findById(id);
+		
+	}
 
 }

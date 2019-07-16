@@ -18,21 +18,21 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 @Data
 @Builder
-//@ToString(exclude = "id")
 @Table(name = "contato")
 public class Contato {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Getter private Long id;
+	private Long id;
 
 	@NotEmpty(message="O DDD deve ser preenchido")
-	@Getter @Setter private String ddd;
+	private String ddd;
 
 	@NotEmpty(message="O Telefone deve ser preenchido")
-	@Getter @Setter private String telefone;
+	private String telefone;
 
 	@NotEmpty(message="O Nome deve ser preenchido")
-	@Getter @Setter private String nome;
+	private String nome;
+
 
 }
